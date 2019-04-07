@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
 
-const App = () => (
-  <div>Hello World!</div>
-);
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      text: '',
+    }
+  }
+
+  onChange = (event) => {
+    this.setState({ text: event.target.value })
+  }
+
+  onClick = () => {
+    console.log(this.state)
+  }
+  
+  render() {
+    return (
+      <div>
+        <h2>Note to Seft</h2>
+        <Form>
+          <FormControl onChange={this.onChange}/>
+          <Button onClick={this.onClick}>Submit</Button>
+        </Form>
+      </div>
+    )
+  }
+}
 
 export default App;
