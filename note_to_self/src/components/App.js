@@ -16,13 +16,14 @@ class App extends Component {
   onClick = () => {
     console.log(this.state)
   }
-  
+
   render() {
     return (
       <div>
         <h2>Note to Seft</h2>
-        <Form>
+        <Form className="displayForm">
           <FormControl onChange={this.onChange}/>
+          &nbsp;
           <Button onClick={this.onClick}>Submit</Button>
         </Form>
       </div>
