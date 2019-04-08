@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
+import Note from './Note';
 
 class App extends Component {
   constructor() {
@@ -41,7 +42,7 @@ class App extends Component {
           <Button onClick={this.onSubmit}>Submit</Button>
         </Form>
         {notes.map((note, i) => (
-          <div key={i}>{note.text}</div>
+          <Note key={i} note={note}/>
         ))}
       </div>
     )
