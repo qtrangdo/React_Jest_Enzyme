@@ -1,0 +1,20 @@
+import React from 'react';
+import { mount } from 'enzyme';
+import Note from './Note';
+
+import '../tempPolyfills';
+ 
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+ 
+configure({ adapter: new Adapter(), disableLifecycleMethods: true });
+
+const props = { note: { text: 'test note' } }
+
+describe('Note Component', () => {
+  let note = mount(<Note {...props} />)
+
+  it('renders the note text', () => {
+    expect((note.find('p')).text()).toEqual(props.note.text);
+  })
+});
