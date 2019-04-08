@@ -6,6 +6,7 @@ class App extends Component {
     super();
     this.state = {
       text: '',
+      notes: [],
     }
   }
 
@@ -13,19 +14,35 @@ class App extends Component {
     this.setState({ text: event.target.value })
   }
 
-  onClick = () => {
-    console.log(this.state)
+  onSubmit = () => {
+    const {notes} = this.state; 
+    const newNote = {text: this.state.text}
+    notes.push(newNote); 
+    this.setState({ notes })
+  }
+
+  onEnter = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      this.onSubmit();
+    } else {
+      this.onChange(event);
+    }
   }
 
   render() {
+    const { notes } = this.state;
     return (
       <div>
         <h2>Note to Seft</h2>
         <Form className="displayForm">
-          <FormControl onChange={this.onChange}/>
+          <FormControl onChange={this.onChange} onKeyDown={this.onEnter}/>
           &nbsp;
-          <Button onClick={this.onClick}>Submit</Button>
+          <Button onClick={this.onSubmit}>Submit</Button>
         </Form>
+        {notes.map((note, i) => (
+          <div key={i}>{note.text}</div>
+        ))}
       </div>
     )
   }
