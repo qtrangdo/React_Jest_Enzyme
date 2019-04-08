@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import Proptypes from 'prop-types';
 
-class Note extends Component {
-  render() {
-    return (
-      <div className="note">
-        <p>{this.props.note.text}</p>
-      </div>
-    )
-  }
-}
+const Note = (props) => (
+  <div className="note">
+    <p>{props.note.text}</p>
+  </div>
+)
+
 
 Note.propTypes = {
   note: Proptypes.shape({
