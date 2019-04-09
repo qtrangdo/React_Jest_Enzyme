@@ -21,7 +21,7 @@ describe('App Component', () => {
   });
 
   describe('when rendering the form', () => {
-    it('creat a form component', () => {
+    it('create a form component', () => {
       expect(app.find('Form').exists()).toBe(true);
     });
 
@@ -32,5 +32,48 @@ describe('App Component', () => {
     it('renders the submit button', () => {
       expect(app.find('.btn').at(0).text()).toEqual('Submit');
     });
-  })
+  });
+
+  describe('when creating a note', () => {
+    let testNote = 'test note';
+    beforeEach(() => {
+      app.find('FormControl').simulate('change', {
+        target: { value: testNote }
+      });
+    });
+
+    it('updates the text in state', () => {
+      expect(app.state().text).toEqual(testNote);
+    });
+
+    describe('and submitting the new note by clicking submit', () => {
+      beforeEach(() => {
+        app.find('.btn').at(0).simulate('click');
+      });
+
+      it('adds the new note to state', () => {
+        expect(app.state().notes[0].text).toEqual(testNote);
+      });
+    })
+
+    describe('and submitting the new note by hit Enter', () => {
+      beforeEach(() => {
+        app.find('FormControl').simulate('keypress', {key: 'Enter'});
+      });
+
+      it('adds the new note to state', () => {
+        expect(app.state().notes[0].text).toEqual(testNote);
+      });
+
+      describe('and clicking clear button', () => {
+        beforeEach(() => {
+          app.find('.btn').at(1).simulate('click');
+        });
+
+        it('clear out notes in state', () => {
+          expect(app.state().notes.length).toEqual(0);
+        })
+      })
+    })
+  });
 })
