@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import App from './App';
 
 import '../tempPolyfills';
- 
+
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -12,7 +12,7 @@ configure({ adapter: new Adapter(), disableLifecycleMethods: true });
 describe('App Component', () => {
   let app = mount(<App />)
 
-  it('renders the App Title', () =>{
+  it('renders the App Title', () => {
     expect(app.find('h2').text()).toEqual('Note to Seft');
   });
 
@@ -58,12 +58,25 @@ describe('App Component', () => {
 
     describe('and submitting the new note by hit Enter', () => {
       beforeEach(() => {
-        app.find('FormControl').simulate('keypress', {key: 'Enter'});
+        app.find('FormControl').simulate('keypress', { key: 'Enter' });
       });
 
       it('adds the new note to state', () => {
         expect(app.state().notes[0].text).toEqual(testNote);
       });
+
+
+      describe('and remounting the component', () => {
+        let app2;
+        beforeEach(() => {
+          app2 = mount(<App />)
+        })
+
+        it('read the stored note cookies', () => {
+          console.log(typeof app2.state())
+          expect(app2.state().notes[0].text).toEqual(testNote);
+        })
+      })
 
       describe('and clicking clear button', () => {
         beforeEach(() => {
@@ -72,8 +85,8 @@ describe('App Component', () => {
 
         it('clear out notes in state', () => {
           expect(app.state().notes.length).toEqual(0);
-        })
-      })
-    })
+        });
+      });
+    });
   });
 })
