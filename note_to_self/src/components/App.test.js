@@ -58,7 +58,7 @@ describe('App Component', () => {
 
     describe('and submitting the new note by hit Enter', () => {
       beforeEach(() => {
-        app.find('FormControl').simulate('keypress', { key: 'Enter' });
+        app.find('FormControl').simulate('keydown', { key: 'Enter' });
       });
 
       it('adds the new note to state', () => {

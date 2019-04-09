@@ -35,9 +35,7 @@ class App extends Component {
     if (event.key === 'Enter') {
       event.preventDefault()
       this.onSubmit();
-    } else {
-      this.onChange(event);
-    }
+    } 
   }
 
   clear = () => {
